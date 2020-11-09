@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+
+<head>
+    <title>小仓唯使用手册</title>
+    <link rel="shortcut icon" href="https://ftp.bmp.ovh/imgs/2020/07/a02e724300f43d03.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <!--made by Github/crovo007 -->
+    <meta name="description" Content="机器人功能指令说明">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+
+        .footnote {
+            color: red;
+        }
+    </style>
+</head>
+
+<body class="markdown-body">
+    <h1>小仓唯使用手册</h1>
+    <h3>小仓唯bot由Github/crovo007整合<br><br>注意：如您是bot的主人，建议您不要将其用于出租，因为您可能不具备出租所需的维护水平；<br>如您是租客，请您谨慎考虑后再行决定是否要租赁此bot。<br></h3>
+    <p><b>快速查阅:</b><br>
+        <a href="#1">如何报刀？</a><br><a href="#2">如何登陆管理界面？</a><br><a href="#3">如何进行各项查询？</a><br><a href="#4">如何抽卡？</a></p>
+    <h2>前言</h2>
+    <p>欢迎您使用小仓唯bot！接下来，本手册将详细介绍本bot的各项功能。<b>若您是初次使用，推荐先查看上方的"快速查阅"栏目。您也可以使用Ctrl+F快速在页面中查找。对于手机，请使用"页面内查找"。</b>如有疑惑，请询问维护组。
+    </p>
+    <h3>指令标记说明：</h3>
+    <p><b>(at)</b>标记代表该命令需要at机器人</p>
+    <p><b>(管理员/维护组)</b>标记表示功能需要管理员或维护组权限 </p>
+    <p><b>(自动)</b>标记启用后无需手动触发，会自动推送或执行 </p>
+    <p>方括号表示参数可以省略</p>
+    <p>命令中间的"+"无需输入</p>
+    <p><b>如无特殊说明，所有功能仅群聊可用。</b></p>
+    <h3>本群服务启禁用说明：</h3>
+    <p>在群聊中发送"lssv -a"<b>(请注意此处有空格)</b>以查看所有服务，其中服务名称前带"启用|"表示该服务已启用，带"禁用|"表示服务已禁用。发送"禁用/启用 服务名"<b>(请注意此处也有空格，如：禁用 gacha)</b>以禁用/启用某个服务<sup class="footnote">1</sup></p>
+    <p><sup class="footnote">1</sup>注：本指令要求管理员以上权限</p>
+    <h2>会战核心功能</h2>
+    <h3>box统计&存轴器</h3>
+    <h4></h4>
+    <p>box统计：发送"帮助pcrbox统计"查看帮助
+    <br>存轴器：发送"帮助pcr轴"查看帮助</p>
+    <p style=color:red><b>注意：初次使用时需要设置数据库名称，请设置不少于六个字符的名称，避免被其他人通过"切换数据库"命令读取。</b></p>
+    <h3><a id="1">会战管理</a></h3>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>手册</td>
+                <td>查看公会战使用手册</td>
+            </tr>
+            <tr>
+                <td>面板</td>
+                <td>进入公会战面板</td>
+            </tr>
+            <tr>
+                <td>创建日服公会</td>
+                <td>日/韩/台/国，创建后可在后台修改</td>
+            </tr>
+            <tr>
+                <td>加入公会 [@某人]</td>
+                <td>加入到公会名单，如果有at则为加入他人</td>
+            </tr>
+            <tr>
+                <td><b>(管理员)</b>加入全部成员</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>报刀2000000 [@某人] [昨日] [:留言]</td>
+                <td>
+                    对boss造成伤害但未击败时用，记录伤害，可以使用 200w/200万/2000k 等（一般公会精确到万即可）<br>
+                    如果有at则为代报，有冒号则为留言<br>
+                    如果有“昨日”则将记录添加到前一天<sup class="footnote">2</sup>
+                </td>
+            </tr>
+            <tr>
+                <td>尾刀 [@某人] [昨日] [:留言]</td>
+                <td>
+                    对boss造成伤害并击败时用，记录伤害<br>
+                    如果有at则为代报，有冒号则为留言<br>
+                    如果有“昨日”则将记录添加到前一天<sup class="footnote">2</sup>
+                </td>
+            </tr>
+            <tr>
+                <td>SL [@某人] [？]</td>
+                <td>挑战boss强制取消后用，记录本日SL<sup class="footnote">3</sup>，用“？”查询今日是否已 SL<br>
+                    如果有at则为代报
+                </td>
+            </tr>
+            <tr>
+                <td>撤销</td>
+                <td>撤销上一次报刀（非管理员只能撤销自己的记录）</td>
+            </tr>
+            <tr>
+                <td>状态</td>
+                <td>显示boss状态</td>
+            </tr>
+            <tr>
+                <td>预约1 [:留言]</td>
+                <td>预约boss，当boss出现时通知，有冒号则为留言</td>
+            </tr>
+            <tr>
+                <td>挂树 [:留言]</td>
+                <td>挂树，当boss被击败时通知</td>
+            </tr>
+            <tr>
+                <td>查1 / 查树</td>
+                <!--made by Github/crovo007 -->
+                <td>查询预约boss的成员，查询挂树的成员</td>
+            </tr>
+            <tr>
+                <td>取消预约1 / 取消1</td>
+                <td>取消预约</td>
+            </tr>
+            <tr>
+                <td>申请出刀</td>
+                <td>锁定boss，提醒后面申请出刀的人有人正在挑战boss</td>
+            </tr>
+            <tr>
+                <td>锁定:留言</td>
+                <td>锁定boss，提醒后面申请出刀的人，冒号后为留言</td>
+            </tr>
+            <tr>
+                <td>解锁</td>
+                <td>解锁boss，其他人可以继续申请<sup class="footnote">4</sup></td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        <sup
+            class="footnote">2</sup>此功能是在日期变更后<b>(游戏中是以凌晨四点(日服)/凌晨五点(国台服)为界)</b>，将出刀记录添加到前一天。例如日服中03:59完成出刀，在04:01时向机器人报刀则需要加上[昨日]<br>
+        <sup class="footnote">3</sup>在公会战面板的“查刀”页中，可以查看所有人今日是否已使用SL<br>
+        <sup class="footnote">4</sup>此功能既可以用于主动结束锁定，也可以用户强制取消他人的解锁。本人或管理员可以随意解锁，3分钟后“出刀”可以被任何人解锁，“锁定”没有时间限制 </p>
+    <h3><a id="2">管理系统</a></h3>
+    <h4>注：群管理员有时可能不会获得后台的管理权限，如出现此种情况，请联系维护组更改。</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>登录</td>
+                <td>登录进入Web模式<sup class="footnote">5</sup>
+            </tr>
+            <tr>
+                <td>重置密码</td>
+                <td>随机生成一个新密码（不发链接）</td>
+            </tr>
+            <tr>
+                <td><b>(管理员)</b>退出此群</td>
+                <!--made by Github/crovo007 -->
+                <td>命令机器人退出当前群聊<sup class="footnote">6</sup></td>
+            </tr>
+            <tr>
+                <td>version</td>
+                <td>查看机器人版本</td>
+            </tr>
+            <tr>
+                <td>帮助</td>
+                <td>查看帮助</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><sup class="footnote">5</sup>如果不知道密码，请先发送"重置密码"</p>
+    <p style=color:red;font-size:120%><sup class="footnote">6</sup>当管理员希望机器人离开群聊时，应该使用此条命令而不是直接踢出群聊，避免增加封号风险</p>
+    <h2>会战附属功能</h2>
+    <h3><a id="3">查询类</a></h3>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>怎么拆 +5个角色名空格分隔</td>
+                <td>查找jjc解法，指定区服可改用“b怎么拆/台怎么拆/日怎么拆”<br><b>需启用pcr-arena服务</b></td>
+            </tr>
+            <tr>
+                <td>pcr速查</td>
+                <td>pcr的主要攻略和数据站速览</td>
+            </tr>
+            <tr>
+                <td>bcr速查</td>
+                <td>国服萌新攻略</td>
+            </tr>
+            <tr>
+                <td>日/台/陆rank表</td>
+                <td>查看各服rank推荐表</td>
+            </tr>
+            <tr>
+                <td>黄骑充电表</td>
+                <td>黄骑1动规律</td>
+            </tr>
+            <tr>
+                <td>谁是xcw</td>
+                <td>角色别称查询</td>
+            </tr>
+            <tr>
+                <td>挖矿计算 +当前名次</td>
+                <!--made by Github/crovo007 -->
+                <td>计算剩余可获得的奖励钻石</td>
+            </tr>
+            <tr>
+                <td>一个顶俩</td>
+                <td>台服接龙小游戏</td>
+            </tr>
+            <tr>
+                <td>B/台服新闻</td>
+                <td>显示最新的B/台服新闻</td>
+            </tr>
+            <tr>
+                <td>官漫132</td>
+                <td>阅读指定话(汉化更新至200话)<br><b>需启用pcr-comic服务</b></td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>公会排名查询</h4>
+    <h4>需启用epck服务</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>会战排名+公会名/排名</td>
+                <td>查看指定名字或指定排名的公会排名</td>
+            </tr>
+            <tr>
+                <td>会战锁定+公会名</td>
+                <td>绑定本群的公会</td>
+            </tr>
+            <tr>
+                <td>会战解锁+公会名</td>
+                <td>解绑本群的公会</td>
+            </tr>
+            <tr>
+                <td>公会排名</td>
+                <td>查询本群绑定的公会的排名信息</td>
+            </tr>
+            <tr>
+                <td><b>(自动)</b>公会排名推送</td>
+                <td>每天早5点30分自动推送本群绑定的公会的排名信息</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><b>注：请在结束会战后取消公会绑定，并在下一次会战开始前重新绑定，否则非会战期间也会推送排名信息。</b></p>
+    <h3>订阅类</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>(自动)</b>日/台/国服背刺时间提醒</td>
+                <td><b>需启用pcr-arena-reminder-jp(日服)或pcr-arena-reminder-tw(国台服)服务</b></td>
+            </tr>
+            <tr>
+                <td><b>(自动)</b>官方四格漫画更新提示(日文)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>(自动)</b>整点报时</td>
+                <td><b>需启用hourcall服务</b></td>
+            </tr>
+            <tr>
+                <td><b>(自动)</b>新闻推送</td>
+                <td>推送最新的新闻<br><b>需启用pcr-news-bili(B服)或pcr-news-tw(台服)或pcr-twitter(日服，暂时关闭)服务</b></td>
+            </tr>
+            <tr>
+                <td><b>(自动)</b>提醒买药小助手(国/台服)</td>
+                <td>每天0、6、12、18点提醒买药(UTC+8)<br><b>需启用hourcallyao服务</b></td>
+            </tr>
+            <tr>
+                <td><b>(自动)</b>提醒买药小助手(日服)</td>
+                <td>每天0、6、12、18点提醒买药(UTC+9)<br><b>需启用hourcallyaojp服务</b></td>
+            </tr>
+    </table>
+    <h2>娱乐及实用类功能</h2>
+    <h3><a id="4">抽卡</a></h3>
+    <h4>需启用gacha服务</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>小仓唯单抽</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>小仓唯十连</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>小仓唯来一井<sup class="footnote">7</sup></td>
+                <td>45000钻，300抽</td>
+            </tr>
+            <tr>
+                <td><b>(管理员)</b>氪金@氪金者</td>
+                <td>增加一次抽一井的机会</td>
+            </tr>
+            <tr>
+                <td>查看卡池</td>
+                <td>查看当期up及出率</td>
+            </tr>
+            <tr>
+                <td>切换卡池</td>
+                <td>可切换B/台/日服卡池</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><sup class="footnote">7</sup>一天只能抽一井，如需多抽，请使用氪金命令</p>
+    <h3>切噜语</h3>
+    <h4>需启用pcr-cherugo服务</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>切噜一下</td>
+                <td>转换为切噜语</td>
+            </tr>
+            <tr>
+                <td>切噜～♪切啰巴切拉切蹦切蹦</td>
+                <td>切噜语翻译</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>签到</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>小仓唯签到</td>
+                <td>给主さま盖章章(随机图样哦)</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>生成器</h3>
+    <h4>需启用generator服务</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>营销号生成器</td>
+                <td>使用"营销号 主体/事件/另一种说法"命令生成</td>
+            </tr>
+            <tr>
+                <td>狗屁不通生成器</td>
+                <td>使用"狗屁不通 主题"命令生成</td>
+            </tr>
+            <tr>
+                <td>记仇表情包生成器</td>
+                <td>使用"记仇 天气/主题"命令生成</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>掷骰子</h3>
+    <h4>需启用dice服务</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>.r</td>
+                <td>掷骰子(默认1d100)</td>
+            </tr>
+            <tr>
+                <td>.r 3d12</td>
+                <td>掷3次12面骰子</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>我问你答</h3>
+    <h4>需启用eqa服务</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>我问A你答B</td>
+                <td>设置自定义答复(仅对设置人有效)</td>
+            </tr>
+            <tr>
+                <td><b>(管理员)</b>大家问/有人问A你答B</td>
+                <td>设置自定义答复(对所有人有效)</td>
+            </tr>
+            <tr>
+                <td>不要回答+问题</td>
+                <td>删除自定义答复<b>(非管理员只能删除自己的问题)</b></td>
+            </tr>
+            <tr>
+                <td>全部问答</td>
+                <td>查看本群所有自定义答复</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>精 致 睡 眠</h3>
+    <h4>需启用sleeping-set服务</h4>
+    <h4>注：本功能需要bot是当前群的管理员，否则不会生效</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>精致睡眠</td>
+                <td>8小时精致睡眠</td>
+            </tr>
+            <tr>
+                <td>给我来一份精致昏睡下午茶套餐</td>
+                <td>叫114514杯先 辈 特 调 红 茶</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>群空调</h3>
+    <h4>需启用aircon服务</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>开空调</td>
+                <td>打开空调（第一次使用时会自动安装空调）</td>
+            </tr>
+            <tr>
+                <td>关空调</td>
+                <td>关闭空调</td>
+            </tr>
+            <tr>
+                <td>当前温度</td>
+                <td>查看当前风速、设定温度、环境温度</td>
+            </tr>
+            <tr>
+                <td>设置温度 温度</td>
+                <td>设置空调温度</td>
+            </tr>
+            <tr>
+                <td>设置风速 1/2/3 (或者低/中/高)</td>
+                <td>设置空调风速（共有三档）</td>
+            </tr>
+            <tr>
+                <td>设置环境温度 温度</td>
+                <td>设置环境温度</td>
+            </tr>
+            <tr>
+                <td>设置环境温度 温度</td>
+                <td>设置环境温度</td>
+            </tr>
+            <tr>
+                <td>升级空调</td>
+                <td>升级空调（家用空调👉中央空调）</td>
+            </tr>
+            <tr>
+                <td>降级空调</td>
+                <td>降级空调（中央空调👉家用空调）</td>
+            </tr>
+            <tr>
+                <td>空调类型</td>
+                <td>查看空调类型（家用空调/中央空调）</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>其他杂项功能</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+            <tr>
+                <td>搜无损+名字</td>
+                <td>搜索无损音乐<br><b>需启用flac服务</b></td>
+            </tr>
+            <tr>
+                <td>来杯咖啡+内容</td>
+                <td><b>(不建议采用此种方法，请直接私聊)</b>向维护组发送反馈信息</td>
+            </tr>
+            <tr>
+                <td>今日运势(vtb版)</td>
+                <td>以下命令均可:抽签、今日人品、今日运势、人品、运势、小狐狸签、吹雪签<br><b>需启用vortune服务</b></td>
+            </tr>
+            <tr>
+                <td><b>(at)</b>网抑云/上号</td>
+                <td>随机来句网抑云语录<br><b>需启用hiumsentences服务</b></td>
+            </tr>
+            <tr>
+                <td>俄罗斯轮盘游戏</td>
+                <td>发送"开枪"开始<br><b>需启用俄罗斯轮盘服务</b></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>致谢</h2>
+    <p>本bot使用了以下开源或非开源的项目或程序，在此向他们表示感谢：<br>
+        <a href="http://cqp.cc" target="_blank">酷Q</a>、<a href="http://yobot.win/" target="_blank">yobot</a>、<a
+            href="https://github.com/Ice-Cirno/HoshinoBot" target="_blank">HoshinoBot</a>、<a href="https://github.com/Tsuk1ko/CQ-picfinder-robot" target="_blank">CQ-picfinder-robot</a>、以及众多的Hoshino和酷Q插件。</p>
+
+</body>
+
+</html>
