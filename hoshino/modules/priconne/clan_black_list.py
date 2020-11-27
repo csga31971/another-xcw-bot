@@ -30,23 +30,23 @@ from hoshino.typing import CQEvent
 sv = Service('prc-cbl')
 
 # 忽略的表头有4行
-keep_head_column = 4
+keep_head_column = 5
 # 每行空白格数是20个
-blank_column = 20
+blank_column = 21
 # 每行数据开始前有一个空格
-blank_head = 1
+blank_head = 0
 # 每行一共有多少个数据
 data_count = 8
 # 数据的结构是啥
 data_name = [
-    'uid',  # 数字ID
-    'name',  # 昵称
-    'qq',  # QQ
-    'behavior',  # 具体行为（时间、事件、造成的后果）
-    'quality',  # 性质
-    'remark',  # 备注（标注公会排名）
-    'report',  # 举报人联系方式
-    'clanBattle'  # 公会战
+    'uid',  
+    'name',  
+    'qq',  
+    'behavior',  
+    'quality',  
+    'remark',  
+    'report',  
+    'clanBattle'  
 ]
 
 # 更新到缓存中 只需要查询这里的数据就好

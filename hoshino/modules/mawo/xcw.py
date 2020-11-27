@@ -29,3 +29,13 @@ async def xcw(bot, ev) -> MessageSegment:
         await bot.send(ev, rec)
     except CQHttpError:
         sv.logger.error("发送失败")
+
+@sv.on_fullmatch('您啪骂我')
+async def ninpa(bot, ev) -> MessageSegment:
+    # conditions all ok, send a xcw.S
+    file = R.get('record/ninpa/', 'ninpa.amr')
+    try:
+        rec = MessageSegment.record(f'file:///{os.path.abspath(file.path)}')
+        await bot.send(ev, rec)
+    except CQHttpError:
+        sv.logger.error("发送失败")

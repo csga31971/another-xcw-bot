@@ -207,7 +207,10 @@ def get_random_cards(origin_cards, card_file_names_list = card_file_names_all, a
         if card_amount > 1:
             img = add_card_amount(img, card_amount)
         coor_x, coor_y = (margin + margin_offset_x + col_index * (size + margin), margin + margin_offset_y + offset_y + offset_critical_strike + row_index * (size + margin))
-        base.paste(img, (coor_x, coor_y), mask=img.split()[3])
+        try:
+            base.paste(img, (coor_x, coor_y), mask=img.split()[3])
+        except:
+            print(random_card)
         if card_id not in origin_cards:
             base = add_icon(base, 'new.png', coor_x + size - 27, coor_y - 5)
     return card_counter, card_descs, MessageSegment.image(util.pic2b64(base))
@@ -496,3 +499,20 @@ async def storage(bot, ev: CQEvent):
     base.save(buf,format='JPEG')
     base64_str = f'base64://{base64.b64encode(buf.getvalue()).decode()}'
     await bot.send(ev, f'{MessageSegment.at(uid)}的仓库:[CQ:image,file={base64_str}]\n持有卡片数: {total_card_num}\n普通卡收集: {normalize_digit_format(normal_card_num)}/{normalize_digit_format(normal_card_total)}\n稀有卡收集: {normalize_digit_format(rare_card_num)}/{normalize_digit_format(rare_card_total)}\n超稀有收集: {normalize_digit_format(super_rare_card_num)}/{normalize_digit_format(super_rare_card_total)}\n图鉴完成度: {normalize_digit_format(len(cards_num))}/{normalize_digit_format(len(card_file_names_all))}\n当前群排名: {ranking_desc}')
+
+
+poke_help = f'''戳一戳相关概率:
+戳一戳获得卡片的概率：75%
+每张卡位普通/稀有/超稀有的概率：{1-RARE_PROBABILITY-SUPER_RARE_PROBABILITY}/{RARE_PROBABILITY}/{SUPER_RARE_PROBABILITY}
+获得1/2/3/4/5/10张卡的概率: 0.1/0.2/0.4/0.2/0.09/0.01
+每张卡额外获得1张/2张的概率: 0.09/0.01
+合成概率：[普通, 稀有, 超稀有]
+普通+普通: {MIX_PROBABILITY['[-1, -1]']}
+普通+稀有: {MIX_PROBABILITY['[-1, 0]']}
+普通+超稀有: {MIX_PROBABILITY['[-1, 1]']}
+稀有+稀有: {MIX_PROBABILITY['[0, 0]']}
+稀有+超稀有: {MIX_PROBABILITY['[0, 1]']}
+超稀有+超稀有: {MIX_PROBABILITY['[1, 1]']}'''
+@sv.on_fullmatch('戳戳帮助')
+async def gacha_info(bot, ev: CQEvent):
+    await bot.send(ev, poke_help)

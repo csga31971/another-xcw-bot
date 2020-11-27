@@ -1,6 +1,7 @@
 # Config Files
 config.py
 config.json
+key_config.json
 hoshino/config/
 local_coolq_config/
 
