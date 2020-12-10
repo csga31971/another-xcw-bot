@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>竞技场解法</title>
+    <style>
+        #mark {
+            float: left;
+            position: relative;
+            bottom: 22px;
+            left: 2px;
+        }
+
+        .detail {
+            position: absolute;
+        }
+
+        h1 {
+            font-size: 40px
+        }
+
+        p {
+            font-size: 28px
+        }
+
+        .equip {
+            width: 16px;
+            height: 16px;
+            background: url("/assets/chara_marks.png")-0 -0;
+        }
+
+        .star {
+            width: 16px;
+            height: 16px;
+            background: url("/assets/chara_marks.png")-16px -0;
+        }
+
+        .star_disabled {
+            width: 16px;
+            height: 16px;
+            background: url("/assets/chara_marks.png")-0 -16px;
+        }
+
+        .star_pink {
+            width: 16px;
+            height: 16px;
+            background: url("/assets/chara_marks.png")-16px -16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>竞技场解法</h1>
+    <p>防守队伍：</p>
+    <div>
+        <img src="/resource/icon/unit/100231.jpg">
+        <img src="/resource/icon/unit/102831.jpg">
+        <img src="/resource/icon/unit/105231.jpg">
+        <img src="/resource/icon/unit/101031.jpg">
+        <img src="/resource/icon/unit/103431.jpg">
+        </div>
+    <p>解法：</p>
+    <table border="0">
+        <tbody>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/111431.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/101231.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/110331.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="equip" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/103431.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/100131.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td>
+                    👍98<br>
+                    👎13<br>
+                    2020-09-26 02:20:37
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/110331.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/106831.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/180531.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/104631.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/105231.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td>
+                    👍24<br>
+                    👎3<br>
+                    2020-10-20 15:29:51
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/111431.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/101231.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/110331.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/103431.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/100131.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td>
+                    👍13<br>
+                    👎3<br>
+                    2020-11-01 04:06:51
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/111431.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/101231.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/110331.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/113331.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/103431.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td>
+                    👍2<br>
+                    👎0<br>
+                    2020-11-05 00:38:34
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/100231.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/106831.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/180531.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/104631.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/105231.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td>
+                    👍1<br>
+                    👎0<br>
+                    2020-11-24 12:47:18
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/111431.jpg">
+                    <div class="detail">
+                        <div class="equip" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/101231.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/180531.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/103431.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/100131.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td>
+                    👍2<br>
+                    👎1<br>
+                    2020-12-05 09:59:10
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/111431.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/101431.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="equip" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/101831.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/107031.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/103431.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td>
+                    👍21<br>
+                    👎18<br>
+                    2020-03-21 12:12:59
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/100231.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/180531.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/104631.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/100131.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/105231.jpg">
+                    <div class="detail">
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star" id="mark"></div>
+                        <div class="star_pink" id="mark"></div>
+                        </div>
+                </td>
+                <td>
+                    👍0<br>
+                    👎0<br>
+                    2020-11-11 14:00:18
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/111031.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/110331.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/100131.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/106131.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/105231.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td>
+                    👍1<br>
+                    👎1<br>
+                    2020-10-12 13:12:43
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/100231.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/111431.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/113431.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/103431.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/104631.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td>
+                    👍2<br>
+                    👎3<br>
+                    2020-09-24 23:08:58
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <img src="/resource/icon/unit/111431.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/101231.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/110331.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/103431.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td valign="top">
+                    <img src="/resource/icon/unit/100131.jpg">
+                    <div class="detail">
+                        </div>
+                </td>
+                <td>
+                    👍2<br>
+                    👎3<br>
+                    2020-11-06 08:49:39
+                </td>
+            </tr>
+            </tbody>
+    </table>
+    <div>数据来源<a href="https://nomae.net/arenadb/">nomae.net</a></div>
+    </body>
+
+</html>

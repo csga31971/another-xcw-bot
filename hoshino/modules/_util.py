@@ -122,8 +122,10 @@ class RSS():
                 params[key] = self.filterout[key]
         params['limit'] = self.limit
         async with aiohttp.ClientSession() as session:
+            print(url)
             async with session.get(url,params=params) as resp:
                 self.xml = await resp.read()
+                print(self.xml)
 
     def parse_xml(self):
         #在实现类中编写解析xml函数

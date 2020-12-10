@@ -4,6 +4,7 @@ import re
 import random
 import os
 import hoshino
+from nonebot import MessageSegment
 from hoshino.util import DailyNumberLimiter
 from hoshino import R, Service
 from hoshino.util import pic2b64
@@ -65,7 +66,7 @@ def drawing_pic(model) -> Image:
     if model == 'xcw':
         base_img = get_base_by_name("frame_28.jpg")
     else:
-        base_img = get_base_by_name("frame_"+str(random.randint(1,68))+".jpg")
+        base_img = get_base_by_name("frame_"+str(random.randint(1,66))+".jpg")
     
 
     filename = os.path.basename(base_img.path)

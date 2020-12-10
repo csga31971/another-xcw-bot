@@ -19,7 +19,7 @@ icon = {}
 PIC_SIDE_LENGTH = 25
 ONE_TURN_TIME = 20
 DB_PATH = os.path.expanduser('~/.hoshino/pcr_avatar_guess_winning_counter.db')
-BLACKLIST_ID = [1072, 1908, 4031, 9000, 1000]
+BLACKLIST_ID = [1072, 1118, 1900, 1907, 1908, 1909, 1910, 1911, 1914, 1915, 1916, 1917, 1918, 1919, 1920, 4031, 9000, 1000]
 answered_players = []
 
 class WinnerJudger:

@@ -1,6 +1,6 @@
 import os
 import json
-
+from . import chara
 
 CHARA_NAME = {}
 CHARA_PROFILE = {}
@@ -56,16 +56,26 @@ class CharaMaster:
             return True
         else:
             return False
+    
+    def check_duplicated(self, nickname:str):
+        '''
+        Return true if duplicated nickname existed.
+        '''
+        for id in CHARA_NAME:
+            if(nickname in CHARA_NAME[id]):
+                return True
+        return False
 
     def add_chara(self, id:int, names:list) -> None:
         CHARA_NAME[id] = names
         self.__save_pcr_data()
 
-
     def add_nickname(self, id:int, nickname:str) -> None:
         CHARA_NAME[id].append(nickname)
         self.__save_pcr_data()
-
+        self.__load_pcr_data()
+        self.__selfcheck()
+        chara.roster.update()
 
 # CHARA_NAME will be loaded while init
 chara_master = CharaMaster()

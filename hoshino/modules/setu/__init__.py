@@ -84,10 +84,7 @@ async def send_common_setu(bot,event: Event):
         await bot.send(event, '正在搜索，请稍等~')
         _freq_limiter.start_cd(uid, 30) # To relieve net pressure
         sv.logger.info(f'含有关键字{keyword}，尝试搜索')
-        if not check_priv(event, SUPERUSER): # SUPERUSER 搜图可以搜出r18
-            setus = await get_final_setu_async(search_path,keyword=keyword,r18=0)
-        else:
-            setus = await get_final_setu_async(search_path,keyword=keyword,r18=2,num=3) 
+        setus = await get_final_setu_async(search_path,keyword=keyword,r18=0)
         if not setus:
             await bot.send(event, f'没有找到关键字{keyword}的涩图，您将被禁用涩图服务60s')
             _freq_limiter.start_cd(uid, 60)

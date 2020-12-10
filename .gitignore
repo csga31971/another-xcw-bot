@@ -4,6 +4,7 @@ config.json
 key_config.json
 hoshino/config/
 local_coolq_config/
+test.py
 
 # Database
 db.json

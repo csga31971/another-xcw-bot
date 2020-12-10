@@ -15,13 +15,13 @@ FRAME_DIR_PATH = os.path.join(__BASE[0],'image')
 DIR_PATH = os.path.join(os.path.expanduser(hoshino.config.RES_DIR), 'img', 'priconne', 'unit')
 DB_PATH = os.path.expanduser("~/.hoshino/poke_man_pcr.db")
 POKE_GET_CARDS = 0.75           # 每一戳的卡片掉落几率
-POKE_DAILY_LIMIT = 3            # 机器人每天掉落卡片的次数
 RARE_PROBABILITY = 0.17         # 戳一戳获得稀有卡片的概率
 SUPER_RARE_PROBABILITY = 0.03   # 戳一戳获得超稀有卡片的概率
 REQUEST_VALID_TIME = 60         # 换卡请求的等待时间
 POKE_TIP_LIMIT = 1              # 到达每日掉落上限后的短时最多提示次数
 TIP_CD_LIMIT = 10*60            # 每日掉落上限提示冷却时间
 POKE_COOLING_TIME = 3           # 增加冷却时间避免连续点击
+POKE_GET_CARD_COOLING_TIME = 1  # 每隔x小时才能获得一次卡
 GIVE_DAILY_LIMIT = 3            # 每人每天最多接受几次赠卡
 RESET_HOUR = 0                  # 每日戳一戳、赠送等指令使用次数的重置时间，0代表凌晨0点，1代表凌晨1点，以此类推
 COL_NUM = 17                    # 查看仓库时每行显示的卡片个数
@@ -42,9 +42,9 @@ sv = Service('poke-man-pcr', bundle='pcr娱乐', help_='''
 '''.strip())
 poke_tip_cd_limiter = FreqLimiter(TIP_CD_LIMIT)
 daily_tip_limiter = DailyAmountLimiter(POKE_TIP_LIMIT, RESET_HOUR)
-daily_limiter = DailyAmountLimiter(POKE_DAILY_LIMIT, RESET_HOUR)
 daily_give_limiter = DailyAmountLimiter(GIVE_DAILY_LIMIT, RESET_HOUR)
 cooling_time_limiter = FreqLimiter(POKE_COOLING_TIME)
+poke_get_card_cooling_time_limiter = FreqLimiter(POKE_GET_CARD_COOLING_TIME)
 exchange_request_master = ExchangeRequestMaster(REQUEST_VALID_TIME)
 db = CardRecordDAO(DB_PATH)
 font = ImageFont.truetype('arial.ttf', 16)
@@ -321,20 +321,21 @@ async def poke_back(session: NoticeSession):
     cooling_time_limiter.start_cd(uid)
     if session.ctx['target_id'] != session.event.self_id:
         return
-    if not daily_limiter.check(guid) and not daily_tip_limiter.check(guid):
-        poke_tip_cd_limiter.start_cd(guid)
-    if not daily_limiter.check(guid) and poke_tip_cd_limiter.check(guid):
-        daily_tip_limiter.increase(guid)
-        await session.send(f'{at_user}你今天戳得已经够多的啦，再戳也不会有奇怪的东西掉下来的~')
+    if not poke_get_card_cooling_time_limiter.check(uid):
+        left_second = int(poke_get_card_cooling_time_limiter.left_time(uid))
+        left_minute, left_second = divmod(left_second, 60)
+        left_hour, left_minute = divmod(left_minute, 60)
+        await session.send(f'{at_user}戳头像冷却中(剩余{left_hour}小时{left_minute}分钟{left_second}秒)')
         return
     daily_tip_limiter.reset(guid)
-    if not daily_limiter.check(guid) or random.random() > POKE_GET_CARDS:
+    if random.random() > POKE_GET_CARDS:
         poke = MessageSegment(type_='poke',
                               data={
                                   'qq': str(session.ctx['user_id']),
                               })
         await session.send(poke)
     else:
+        poke_get_card_cooling_time_limiter.start_cd(uid, POKE_GET_CARD_COOLING_TIME*60*60)
         card_counter, card_descs, card = get_random_cards(db.get_cards_num(session.ctx['group_id'], session.ctx['user_id']), card_file_names_all,
                                                           roll_cards_amount(), True)
         dash =  '----------------------------------------'
@@ -342,7 +343,38 @@ async def poke_back(session: NoticeSession):
         await session.send(f'别戳了别戳了o(╥﹏╥)o{card}{at_user}这些卡送给你了, 让我安静会...\n{dash}\n获得了:\n{msg_part}')
         for card_id in card_counter.keys():
             db.add_card_num(session.ctx['group_id'], session.ctx['user_id'], card_id, card_counter[card_id])
-        daily_limiter.increase(guid)
+
+@sv.on_fullmatch('戳戳')
+async def poke_back_text(bot, ev: CQEvent):
+    user_id = ev.user_id
+    group_id = ev.group_id
+    at_user = MessageSegment.at(user_id)
+    guid = ev.group_id, ev.user_id
+    if not cooling_time_limiter.check(user_id):
+        return
+    cooling_time_limiter.start_cd(user_id)
+    if not poke_get_card_cooling_time_limiter.check(user_id):
+        left_second = int(poke_get_card_cooling_time_limiter.left_time(user_id))
+        left_minute, left_second = divmod(left_second, 60)
+        left_hour, left_minute = divmod(left_minute, 60)
+        await bot.send(ev, f'{at_user}戳头像冷却中(剩余{left_hour}小时{left_minute}分钟{left_second}秒)', at_sender=True)
+        return
+    daily_tip_limiter.reset(guid)
+    if random.random() > POKE_GET_CARDS:
+        poke = MessageSegment(type_='poke',
+                              data={
+                                  'qq': str(user_id),
+                              })
+        await bot.send(ev, poke)
+    else:
+        poke_get_card_cooling_time_limiter.start_cd(user_id, POKE_GET_CARD_COOLING_TIME*60*60)
+        card_counter, card_descs, card = get_random_cards(db.get_cards_num(group_id, user_id), card_file_names_all,
+                                                          roll_cards_amount(), True)
+        dash =  '----------------------------------------'
+        msg_part = '\n'.join(card_descs)
+        await bot.send(ev, f'别戳了别戳了o(╥﹏╥)o{card}{at_user}这些卡送给你了, 让我安静会...\n{dash}\n获得了:\n{msg_part}')
+        for card_id in card_counter.keys():
+            db.add_card_num(group_id, user_id, card_id, card_counter[card_id])
 
 
 @sv.on_prefix(('献祭','合成','融合'))

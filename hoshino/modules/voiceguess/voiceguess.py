@@ -144,10 +144,8 @@ async def voice_guess(bot, ev: CQEvent):
         chara_path = os.path.join(HOSHINO_RES_PATH, 'record', chosen_chara)
         chara_list = os.listdir(chara_path)
         chosen_file = random.choice(chara_list)
-        print(chosen_file)
-        chosen_filem4a = chosen_file.replace(".amr", ".m4a")
         file_path = os.path.join(chara_path, chosen_file)
-        await bot.send(ev, f'猜猜这段语音来自哪位角色? ({ONE_TURN_TIME+10}s后公布答案)\nhttps://redive.estertion.win/sound/unit_battle_voice/{chosen_chara}/{chosen_filem4a}')
+        await bot.send(ev, f'猜猜这段语音来自哪位角色? ({ONE_TURN_TIME+10}s后公布答案)')
         await bot.send(ev, MessageSegment.record(f'file:///{os.path.abspath(file_path)}'))
         #兼容"小仓唯骂我"插件的语音资源
         if chosen_chara == 'mawo':
