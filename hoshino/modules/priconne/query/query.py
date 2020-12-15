@@ -10,6 +10,7 @@ p5 = R.img('priconne/quick/r17-3-jp-2.png').cqcode
 p6 = R.img('priconne/quick/r17-3-jp-3.png').cqcode
 p7 = R.img('priconne/quick/r8-3.jpg').cqcode
 p8 = R.img('priconne/quick/r9-5-cn.png').cqcode
+p9 = R.img('priconne/quick/r9-5-cn2.png').cqcode
 
 @sv.on_rex(r'^(\*?([日台国陆b])服?([前中后]*)卫?)?rank(表|推荐|指南)?$')
 async def rank_sheet(bot, ev):
@@ -39,7 +40,7 @@ async def rank_sheet(bot, ev):
         await bot.send(ev, '\n'.join(msg), at_sender=True)
         #await util.silence(ev, 60)
     elif is_cn:
-        msg.append(f'※不定期搬运自B站席巴鸽\nR11-3 rank表：\n{p8}')
+        msg.append(f'※不定期搬运自B站席巴鸽\nR11-4 rank表：\n{p8}{p9}')
         await bot.send(ev, '\n'.join(msg), at_sender=True)
         # await bot.send(ev, str(p7))
         # await util.silence(ev, 60)

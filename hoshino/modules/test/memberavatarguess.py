@@ -43,7 +43,7 @@ class WinnerJudger:
 
 winner_judger = WinnerJudger()
 
-@sv.on_fullmatch('测试111')
+@sv.on_fullmatch('猜群友')
 async def memberguess(bot, ev: CQEvent):
     if not priv.check_priv(ev, priv.SUPERUSER):
         await bot.send(ev, '¿')

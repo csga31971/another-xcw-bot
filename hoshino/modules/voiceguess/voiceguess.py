@@ -150,6 +150,8 @@ async def voice_guess(bot, ev: CQEvent):
         #兼容"小仓唯骂我"插件的语音资源
         if chosen_chara == 'mawo':
             game.answer = 1036
+        elif chosen_chara == 'ub':
+            game.answer = 1111
         else:
             game.answer = int(chara_id)
         #print(chara.fromid(game.answer).name)

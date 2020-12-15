@@ -329,10 +329,7 @@ async def poke_back(session: NoticeSession):
         return
     daily_tip_limiter.reset(guid)
     if random.random() > POKE_GET_CARDS:
-        poke = MessageSegment(type_='poke',
-                              data={
-                                  'qq': str(session.ctx['user_id']),
-                              })
+        poke = '诶嘿~戳不到~'
         await session.send(poke)
     else:
         poke_get_card_cooling_time_limiter.start_cd(uid, POKE_GET_CARD_COOLING_TIME*60*60)
@@ -361,10 +358,7 @@ async def poke_back_text(bot, ev: CQEvent):
         return
     daily_tip_limiter.reset(guid)
     if random.random() > POKE_GET_CARDS:
-        poke = MessageSegment(type_='poke',
-                              data={
-                                  'qq': str(user_id),
-                              })
+        poke = '诶嘿~戳不到~'
         await bot.send(ev, poke)
     else:
         poke_get_card_cooling_time_limiter.start_cd(user_id, POKE_GET_CARD_COOLING_TIME*60*60)

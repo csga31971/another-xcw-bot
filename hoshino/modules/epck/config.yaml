@@ -1,6 +1,6 @@
 # 管理员
 admins:
-  - 269077688
+  - 410762240
 
 # 缓存存放目录
 cache_dir: ./data/
@@ -42,7 +42,7 @@ rules:
 
   # -------------------------------
   # 定时任务
-  enable_broadcast_time: false
+  enable_broadcast_time: true
   # 设置默认每天早上5点半推送一次
   broadcast_time:
     day_of_week: '*'
